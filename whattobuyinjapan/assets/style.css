@@ -47,6 +47,12 @@ tbody th { white-space: nowrap; }
 .preview { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; margin: 18px 0; }
 .hero { text-align: center; padding: 24px 0 8px; }
 .hero img { border-radius: 50%; }
+figure.photo { margin: 1.6rem 0; }
+figure.photo img { width: 100%; height: auto; border-radius: 10px; display: block; background: #efe9df; }
+figure.photo figcaption { font-size: .86rem; color: #6b6b72; margin-top: .5rem; }
+.photo-row { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .photo-row { grid-template-columns: 1fr 1fr; } }
+.photo-row figure.photo { margin: 1.6rem 0 0; }
 .hero h1 { font-size: 40px; margin: 8px 0; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
 .card { display: flex; flex-direction: column; gap: 6px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px; color: var(--ink); text-decoration: none; }
