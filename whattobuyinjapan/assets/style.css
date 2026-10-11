@@ -59,7 +59,27 @@ figure.photo figcaption { font-size: .86rem; color: #6b6b72; margin-top: .5rem; 
 .photo-row figure.photo { margin: 1.6rem 0 0; }
 .hero h1 { font-size: 40px; margin: 8px 0; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
-.card { display: flex; flex-direction: column; gap: 6px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px; color: var(--ink); text-decoration: none; }
-.card strong { font-size: 21px; }
-.card span:last-child { color: var(--muted); font-size: 16px; }
+.card {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;
+  min-height: 240px; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 14px; padding: 22px; color: var(--ink); text-decoration: none;
+}
+.card-photo {
+  position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform .25s ease;
+}
+.card::before {
+  /* 上は薄く、下（文字のある辺り）は濃く。雑多な商品棚の写真の上でも
+     白文字が読めるようにするための暗いグラデーション */
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to bottom, rgba(10,8,6,0) 0%, rgba(10,8,6,.12) 35%, rgba(10,8,6,.55) 65%, rgba(10,8,6,.92) 100%);
+  pointer-events: none;
+}
+.card .kicker, .card strong, .card span:last-child { position: relative; z-index: 2; }
+.card .kicker { color: #ffd9c2; }
+.card strong { font-size: 21px; color: #fff; }
+.card span:last-child { color: #ece6dc; font-size: 16px; }
+.card:hover .card-photo { transform: scale(1.04); }
+.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .site-footer { color: var(--muted); font: 14px/1.6 -apple-system, "Segoe UI", Arial, sans-serif; padding-top: 12px; padding-bottom: 32px; border-top: 1px solid var(--line); }
