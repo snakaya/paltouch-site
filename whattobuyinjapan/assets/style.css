@@ -71,17 +71,17 @@ figure.photo figcaption { font-size: .86rem; color: #6b6b72; margin-top: .5rem; 
   /* 色の多い商品棚の写真が文字と競るので、彩度と明るさを落として背景に退かせる */
   filter: saturate(1.4) brightness(.75);
 }
-.card::before {
-  /* 上は薄く、下（文字のある辺り）は濃く。雑多な商品棚の写真の上でも
-     白文字が読めるようにするための暗いグラデーション */
-  content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to bottom, rgba(10,8,6,.15) 0%, rgba(10,8,6,.35) 30%, rgba(10,8,6,.7) 55%, rgba(10,8,6,.92) 100%);
-  pointer-events: none;
+.card-text {
+  /* 暗いグラデーションは文字の塊にだけ敷く。上端から始まって文字の手前で濃くなるので、
+     タイトルが何行でも文字の上の写真は明るいまま、文字の下は必ず暗い */
+  position: relative; z-index: 1; display: flex; flex-direction: column; gap: 6px;
+  margin: 0 -22px -22px; padding: 64px 22px 22px;
+  background: linear-gradient(to bottom, rgba(10,8,6,0) 0, rgba(10,8,6,.72) 60px, rgba(10,8,6,.9) 100%);
 }
-.card .kicker, .card strong, .card span:last-child { position: relative; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.card-text > * { text-shadow: 0 1px 3px rgba(0,0,0,.6); }
 .card .kicker { color: #ffd9c2; }
 .card strong { font-size: 21px; color: #fff; }
-.card span:last-child { color: #ece6dc; font-size: 16px; }
+.card-text > span:last-child { color: #ece6dc; font-size: 16px; }
 .card:hover .card-photo { transform: scale(1.04); }
 .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .site-footer { color: var(--muted); font: 14px/1.6 -apple-system, "Segoe UI", Arial, sans-serif; padding-top: 12px; padding-bottom: 32px; border-top: 1px solid var(--line); }
